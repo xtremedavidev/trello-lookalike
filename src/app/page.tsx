@@ -110,8 +110,8 @@ export default function Home() {
     try {
       const newCard = await api.createCard(cardData);
       onSuccess(newCard);
-    } catch (err: any) {
-      setCardOpError(err?.message || "Failed to create card");
+    } catch (err: unknown) {
+      setCardOpError(err instanceof Error ? err.message : "Failed to create card");
     } finally {
       setCardOpLoading(false);
     }
@@ -214,8 +214,8 @@ export default function Home() {
               )
             : []),
         ]);
-      } catch (error: any) {
-        setCardOpError(error?.message || "Failed to update card positions");
+      } catch (error: unknown) {
+        setCardOpError(error instanceof Error ? error.message : "Failed to update card positions");
       } finally {
         setCardOpLoading(false);
       }

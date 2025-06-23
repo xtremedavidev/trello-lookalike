@@ -12,9 +12,6 @@ import { List as ListType, Card as CardType } from "@/types";
 import { useState, useRef, useEffect } from "react";
 import { api } from "@/libs/api";
 
-// If in a browser context (Next.js frontend)
-type RequestInit = globalThis.RequestInit;
-
 export function List({
   list,
   cards,
