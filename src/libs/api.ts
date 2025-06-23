@@ -1,5 +1,5 @@
-import Cookies from 'js-cookie';
-import { Board, Card, List, User } from '@/types';
+import Cookies from "js-cookie";
+import { Board, Card, List, User } from "@/types";
 
 class BoardHubAPI {
   baseURL: string;
@@ -9,15 +9,15 @@ class BoardHubAPI {
   }
 
   getToken() {
-    return Cookies.get('token');
+    return Cookies.get("token");
   }
 
   setToken(token: string) {
-    Cookies.set('token', token, { expires: 7, path: '/' });
+    Cookies.set("token", token, { expires: 7, path: "/" });
   }
 
   removeToken() {
-    Cookies.remove('token', { path: '/' });
+    Cookies.remove("token", { path: "/" });
   }
 
   async request(endpoint: string, options: RequestInit = {}) {
@@ -26,13 +26,14 @@ class BoardHubAPI {
     const config: RequestInit = {
       ...options,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         ...options.headers,
       },
     };
 
     if (token) {
-      (config.headers as Record<string, string>).Authorization = `Bearer ${token}`;
+      (config.headers as Record<string, string>).Authorization =
+        `Bearer ${token}`;
     }
 
     const response = await fetch(url, config);
@@ -41,11 +42,11 @@ class BoardHubAPI {
     if (!response.ok) {
       if (response.status === 401) {
         this.removeToken();
-        if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+        if (typeof window !== "undefined") {
+          window.location.href = "/login";
         }
       }
-      throw new Error(data.message || 'API request failed');
+      throw new Error(data.message || "API request failed");
     }
 
     return data;
@@ -53,8 +54,8 @@ class BoardHubAPI {
 
   // Authentication
   async login(email: string, password: string): Promise<User> {
-    const data = await this.request('/auth/login', {
-      method: 'POST',
+    const data = await this.request("/auth/login", {
+      method: "POST",
       body: JSON.stringify({ email, password }),
     });
     this.setToken(data.data.token);
@@ -62,8 +63,8 @@ class BoardHubAPI {
   }
 
   async register(name: string, email: string, password: string): Promise<User> {
-    const data = await this.request('/auth/register', {
-      method: 'POST',
+    const data = await this.request("/auth/register", {
+      method: "POST",
       body: JSON.stringify({ name, email, password }),
     });
     this.setToken(data.data.token);
@@ -71,18 +72,18 @@ class BoardHubAPI {
   }
 
   async logout() {
-    await this.request('/auth/logout', { method: 'POST' });
+    await this.request("/auth/logout", { method: "POST" });
     this.removeToken();
   }
 
   async getMe(): Promise<User> {
-    const data = await this.request('/auth/me');
+    const data = await this.request("/auth/me");
     return data.data.user;
   }
 
   async updateProfile(userData: Partial<User>): Promise<User> {
-    const data = await this.request('/auth/profile', {
-      method: 'PUT',
+    const data = await this.request("/auth/profile", {
+      method: "PUT",
       body: JSON.stringify(userData),
     });
     return data.data.user;
@@ -90,28 +91,31 @@ class BoardHubAPI {
 
   // Boards
   async getBoards(): Promise<Board[]> {
-    const data = await this.request('/boards');
+    const data = await this.request("/boards");
     return data.data.boards;
   }
 
   async createBoard(boardData: Partial<Board>): Promise<Board> {
-    const data = await this.request('/boards', {
-      method: 'POST',
+    const data = await this.request("/boards", {
+      method: "POST",
       body: JSON.stringify(boardData),
     });
     return data.data.board;
   }
 
-  async updateBoard(boardId: string, boardData: Partial<Board>): Promise<Board> {
+  async updateBoard(
+    boardId: string,
+    boardData: Partial<Board>,
+  ): Promise<Board> {
     const data = await this.request(`/boards/${boardId}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(boardData),
     });
     return data.data.board;
   }
 
   async deleteBoard(boardId: string): Promise<void> {
-    await this.request(`/boards/${boardId}`, { method: 'DELETE' });
+    await this.request(`/boards/${boardId}`, { method: "DELETE" });
   }
 
   // Lists
@@ -121,8 +125,8 @@ class BoardHubAPI {
   }
 
   async createList(listData: Partial<List>): Promise<List> {
-    const data = await this.request('/lists', {
-      method: 'POST',
+    const data = await this.request("/lists", {
+      method: "POST",
       body: JSON.stringify(listData),
     });
     return data.data.list;
@@ -130,7 +134,7 @@ class BoardHubAPI {
 
   async updateList(listId: string, listData: Partial<List>): Promise<List> {
     const data = await this.request(`/lists/${listId}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(listData),
     });
     return data.data.list;
@@ -138,8 +142,8 @@ class BoardHubAPI {
 
   async reorderList(listId: string, newOrder: number) {
     return this.request(`/lists/${listId}/reorder`, {
-        method: 'PUT',
-        body: JSON.stringify({ newOrder }),
+      method: "PUT",
+      body: JSON.stringify({ newOrder }),
     });
   }
 
@@ -150,8 +154,8 @@ class BoardHubAPI {
   }
 
   async createCard(cardData: Partial<Card>): Promise<Card> {
-    const data = await this.request('/cards', {
-      method: 'POST',
+    const data = await this.request("/cards", {
+      method: "POST",
       body: JSON.stringify(cardData),
     });
     return data.data.card;
@@ -159,27 +163,31 @@ class BoardHubAPI {
 
   async updateCard(cardId: string, cardData: Partial<Card>): Promise<Card> {
     const data = await this.request(`/cards/${cardId}`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(cardData),
     });
     return data.data.card;
   }
 
   async deleteCard(cardId: string): Promise<void> {
-    await this.request(`/cards/${cardId}`, { method: 'DELETE' });
+    await this.request(`/cards/${cardId}`, { method: "DELETE" });
   }
 
-  async moveCard(cardId: string, newListId: string, newOrder: number): Promise<Card> {
+  async moveCard(
+    cardId: string,
+    newListId: string,
+    newOrder: number,
+  ): Promise<Card> {
     const data = await this.request(`/cards/${cardId}/move`, {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify({ newListId, newOrder }),
     });
     return data.data.card;
   }
 
   async deleteList(listId: string): Promise<void> {
-    await this.request(`/lists/${listId}`, { method: 'DELETE' });
+    await this.request(`/lists/${listId}`, { method: "DELETE" });
   }
 }
 
-export const api = new BoardHubAPI('https://boardhub-backend.onrender.com/api'); 
+export const api = new BoardHubAPI("https://boardhub-backend.onrender.com/api");

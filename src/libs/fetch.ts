@@ -1,12 +1,12 @@
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 export async function fetchWithCsrf(url: string, options: RequestInit = {}) {
-  const csrfToken = Cookies.get('csrf-token');
+  const csrfToken = Cookies.get("csrf-token");
 
   const headers = {
     ...options.headers,
-    'Content-Type': 'application/json',
-    'x-csrf-token': csrfToken || '',
+    "Content-Type": "application/json",
+    "x-csrf-token": csrfToken || "",
   };
 
   return fetch(url, {
@@ -16,11 +16,11 @@ export async function fetchWithCsrf(url: string, options: RequestInit = {}) {
 }
 
 export async function fetchWithAuth(url: string, options: RequestInit = {}) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const headers = {
     ...options.headers,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
 
@@ -28,4 +28,4 @@ export async function fetchWithAuth(url: string, options: RequestInit = {}) {
     ...options,
     headers,
   });
-} 
+}

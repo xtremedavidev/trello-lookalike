@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { logger } from '@/libs/logger';
+import { useEffect } from "react";
+import { logger } from "@/libs/logger";
 
 export default function Error({
   error,
@@ -12,7 +12,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    logger.error('Unhandled error', error);
+    logger.error("Unhandled error", error);
   }, [error]);
 
   return (
@@ -30,4 +30,4 @@ export default function Error({
       </button>
     </div>
   );
-} 
+}

@@ -1,4 +1,2 @@
 /** @type {import('next').NextConfig} */
-export default {
-
-};
+export default {};

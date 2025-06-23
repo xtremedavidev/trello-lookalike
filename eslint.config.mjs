@@ -5,7 +5,7 @@ import typescriptParser from "@typescript-eslint/parser";
 import prettierConfig from "eslint-config-prettier";
 import prettierPlugin from "eslint-plugin-prettier";
 import importPlugin from "eslint-plugin-import";
-import nextPlugin from "@next/eslint-plugin-next"
+import nextPlugin from "@next/eslint-plugin-next";
 
 export default [
   {

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
@@ -21,27 +17,13 @@
     "allowImportingTsExtensions": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@libs/*": [
-        "src/libs/*"
-      ],
-      "@models/*": [
-        "src/libs/db/models/*"
-      ],
-      "@types/*": [
-        "src/types/*"
-      ],
-      "@contexts/*": [
-        "src/contexts/*"
-      ],
-      "@hooks/*": [
-        "src/hooks/*"
-      ]
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@libs/*": ["src/libs/*"],
+      "@models/*": ["src/libs/db/models/*"],
+      "@types/*": ["src/types/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "plugins": [
       {
@@ -49,14 +31,6 @@
       }
     ]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    ".next",
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next"]
 }

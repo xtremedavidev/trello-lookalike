@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { api } from '@/libs/api';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { api } from "@/libs/api";
 
 export default function SignupPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -16,17 +16,27 @@ export default function SignupPage() {
     setError(null);
     try {
       await api.register(name, email, password);
-      router.push('/');
+      router.push("/");
     } catch (err: any) {
-      setError(err.message || 'Signup failed');
+      setError(err.message || "Signup failed");
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <form onSubmit={handleSubmit} className="p-8 border rounded-lg shadow-lg w-96">
+      <form
+        onSubmit={handleSubmit}
+        className="p-8 border rounded-lg shadow-lg w-96"
+      >
         <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
-        {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">{error}</div>}
+        {error && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+            role="alert"
+          >
+            {error}
+          </div>
+        )}
         <div className="mb-4">
           <label className="block mb-1">Name</label>
           <input
@@ -54,10 +64,13 @@ export default function SignupPage() {
             className="w-full p-2 border rounded"
           />
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded"
+        >
           Sign Up
         </button>
       </form>
     </div>
   );
-} 
+}

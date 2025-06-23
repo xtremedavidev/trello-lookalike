@@ -65,4 +65,4 @@ export interface Card {
   isArchived: boolean;
   createdAt?: string;
   updatedAt?: string;
-} 
+}
