@@ -1,5 +1,7 @@
 import Cookies from "js-cookie";
 
+type RequestInit = globalThis.RequestInit;
+
 export async function fetchWithCsrf(url: string, options: RequestInit = {}) {
   const csrfToken = Cookies.get("csrf-token");
 

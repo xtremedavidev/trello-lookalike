@@ -17,8 +17,8 @@ export default function SignupPage() {
     try {
       await api.register(name, email, password);
       router.push("/");
-    } catch (err: any) {
-      setError(err.message || "Signup failed");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Signup failed");
     }
   };
 

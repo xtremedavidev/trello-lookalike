@@ -305,7 +305,7 @@ export function Card({
                     onChange={(e) =>
                       setEditedCard({
                         ...editedCard,
-                        priority: e.target.value as any,
+                        priority: e.target.value as unknown,
                       })
                     }
                     className="w-full p-2 border dark:border-gray-600 rounded-lg bg-transparent dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"

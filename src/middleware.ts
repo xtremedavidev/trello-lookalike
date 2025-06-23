@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const TOKEN_NAME = "token";
-const PUBLIC_FILE = ["/login"];
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get(TOKEN_NAME)?.value;

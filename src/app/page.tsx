@@ -5,7 +5,6 @@ import { DndContext, closestCorners, DragEndEvent } from "@dnd-kit/core";
 import {
   SortableContext,
   horizontalListSortingStrategy,
-  verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
 import {
@@ -15,7 +14,6 @@ import {
 } from "@/types";
 import { List } from "@/components/dnd/List";
 import { BoardSkeleton } from "@/components/dnd/BoardSkeleton";
-import { Button } from "@/components/ui/Button";
 import { api } from "@/libs/api";
 
 export default function Home() {
@@ -97,10 +95,6 @@ export default function Home() {
       }
     }
   };
-
-  // Helper to get all card ids for a list
-  const getCardIds = (listId: string) =>
-    (cards[listId] || []).map((card) => card._id);
 
   // Helper to get all cards for a list
   const getCards = (listId: string = "") => cards[listId] || [];

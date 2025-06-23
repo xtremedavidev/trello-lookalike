@@ -12,6 +12,9 @@ import { List as ListType, Card as CardType } from "@/types";
 import { useState, useRef, useEffect } from "react";
 import { api } from "@/libs/api";
 
+// If in a browser context (Next.js frontend)
+type RequestInit = globalThis.RequestInit;
+
 export function List({
   list,
   cards,
@@ -132,7 +135,7 @@ export function List({
     const newCards = cards.filter((c) => c._id !== cardId);
     if (onCardCreated) {
       const updatedList = { ...list, cards: newCards };
-      onCardCreated(updatedList as any);
+      onCardCreated(updatedList as unknown as CardType);
     }
   };
 

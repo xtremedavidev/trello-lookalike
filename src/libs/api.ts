@@ -1,6 +1,8 @@
 import Cookies from "js-cookie";
 import { Board, Card, List, User } from "@/types";
 
+type RequestInit = globalThis.RequestInit;
+
 class BoardHubAPI {
   baseURL: string;
 
