@@ -3,10 +3,10 @@ export interface User {
   name: string;
   email: string;
   avatar?: string;
-  role: 'user' | 'admin';
+  role: "user" | "admin";
   isActive: boolean;
   preferences: {
-    theme: 'light' | 'dark';
+    theme: "light" | "dark";
     notifications: {
       email: boolean;
       push: boolean;
@@ -21,7 +21,7 @@ export interface Board {
   description: string;
   owner: string;
   background: {
-    type: 'color' | 'image';
+    type: "color" | "image";
     value: string;
   };
   isPublic: boolean;
@@ -50,7 +50,7 @@ export interface Card {
   _id: string;
   title: string;
   description?: string;
-  priority?: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   isCompleted?: boolean;
   list: string;
   board: string;
