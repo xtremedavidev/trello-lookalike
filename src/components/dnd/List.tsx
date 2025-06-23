@@ -140,10 +140,10 @@ export function List({
 
   return (
     <div
+      ref={setNodeRef}
       className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-72 flex flex-col max-h-[calc(100vh-12rem)] group"
     >
       <div
-        ref={setNodeRef}
         {...attributes}
         {...listeners}
         className="p-3 flex items-center justify-between rounded-t-lg border-b dark:border-gray-700"
