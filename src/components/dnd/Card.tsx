@@ -37,8 +37,8 @@ export function Card({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -251,11 +251,11 @@ export function Card({
       {isEditing && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/30"
-          onMouseDown={handleModalClose}
+          onClick={handleModalClose}
         >
           <div
             className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-lg mx-4"
-            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">

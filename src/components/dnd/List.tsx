@@ -79,6 +79,8 @@ export function List({
       list: list._id || list.id || "",
       board: list.board,
       order: newOrder,
+      priority: "low" as "low" | "medium" | "high",
+      isCompleted: false,
     };
     if (onCreateCard) {
       onCreateCard(list._id || list.id || "", cardData, (newCard) => {
@@ -138,13 +140,14 @@ export function List({
 
   return (
     <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
       className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-72 flex flex-col max-h-[calc(100vh-12rem)] group"
     >
-      <div className="p-3 flex items-center justify-between rounded-t-lg border-b dark:border-gray-700">
+      <div
+        ref={setNodeRef}
+        {...attributes}
+        {...listeners}
+        className="p-3 flex items-center justify-between rounded-t-lg border-b dark:border-gray-700"
+      >
         {isEditing ? (
           <input
             type="text"
@@ -229,9 +232,9 @@ export function List({
         strategy={verticalListSortingStrategy}
       >
         <div className="flex-1 px-2 py-3 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
-          {cards.map((card) => (
+          {cards.map((card, idx) => (
             <Card
-              key={card._id}
+              key={card._id || (card.title + idx)}
               card={card}
               listId={list.id || list._id || ""}
               onDelete={handleCardDelete}
